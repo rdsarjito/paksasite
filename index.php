@@ -55,6 +55,29 @@
  */
 	define('ENVIRONMENT', isset($_SERVER['CI_ENV']) ? $_SERVER['CI_ENV'] : 'development');
 
+	// Lightweight .env loader (project root /.env)
+	// Supports KEY=VALUE lines, ignores empty lines and comments starting with #
+	if (file_exists(__DIR__ . '/.env')) {
+		$envLines = file(__DIR__ . '/.env', FILE_IGNORE_NEW_LINES | FILE_SKIP_EMPTY_LINES);
+		foreach ($envLines as $line) {
+			if (strpos(ltrim($line), '#') === 0) {
+				continue;
+			}
+			$pos = strpos($line, '=');
+			if ($pos !== false) {
+				$key = trim(substr($line, 0, $pos));
+				$value = trim(substr($line, $pos + 1));
+				if ((strlen($value) >= 2) && (($value[0] === '"' && substr($value, -1) === '"') || ($value[0] === '\'' && substr($value, -1) === '\''))) {
+					$value = substr($value, 1, -1);
+				}
+				if ($key !== '') {
+					putenv($key . '=' . $value);
+					$_ENV[$key] = $value;
+				}
+			}
+		}
+	}
+
 /*
  *---------------------------------------------------------------
  * ERROR REPORTING

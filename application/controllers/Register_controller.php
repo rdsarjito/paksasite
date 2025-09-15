@@ -16,7 +16,8 @@ class Register_controller extends CI_Controller
         $this->form_validation->set_rules('username', 'Username', 'callback_username_check');
 
         if ($this->form_validation->run() === FALSE) {
-            $this->load->view('register_views');
+            $data['recaptcha_site_key'] = getenv('RECAPTCHA_SITE_KEY') ?: '';
+            $this->load->view('register_views', $data);
         } else {
             $fullname = $this->input->post('fullname');
             $username = $this->input->post('username');
@@ -27,7 +28,8 @@ class Register_controller extends CI_Controller
                 redirect('login');
             } else {
                 $this->session->set_flashdata('message_register_error', 'Registration failed.');
-                $this->load->view('register_views');
+                $data['recaptcha_site_key'] = getenv('RECAPTCHA_SITE_KEY') ?: '';
+                $this->load->view('register_views', $data);
             }
         }
     }

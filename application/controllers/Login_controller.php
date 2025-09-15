@@ -29,7 +29,7 @@ class Login_controller extends CI_Controller
 
         if($captcha_response != '')
         {
-            $keySecret = '6LdAhOIpAAAAAGYg9rsV8Bep1u0pCZ8yLgoStpbF';
+            $keySecret = getenv('RECAPTCHA_SECRET') ?: '';
 
             $check = array(
                 'secret'        => $keySecret,
@@ -69,7 +69,8 @@ class Login_controller extends CI_Controller
             $this->session->set_flashdata('message_login_error', 'Captcha is required.');
         }
 
-        $this->load->view('login_views');
+        $data['recaptcha_site_key'] = getenv('RECAPTCHA_SITE_KEY') ?: '';
+        $this->load->view('login_views', $data);
     }
 
     public function logout()

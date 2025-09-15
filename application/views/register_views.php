@@ -158,7 +158,7 @@
                 </div>
                 <div class="form-group mb-3">
                   <div class="recaptcha-container">
-                    <div class="g-recaptcha" data-sitekey="6LdAhOIpAAAAAC3H8Gm4-fEhLNGMhdtRdcVSs29M"></div>
+                    <div class="g-recaptcha" data-sitekey="<?= htmlspecialchars(isset($recaptcha_site_key)?$recaptcha_site_key:'', ENT_QUOTES, 'UTF-8') ?>"></div>
                   </div>
                 </div>
                 <div class="form-group m-0">
