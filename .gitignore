@@ -1,0 +1,43 @@
+# macOS
+.DS_Store
+.AppleDouble
+.LSOverride
+
+# IDE/editor
+.vscode/
+.idea/
+*.code-workspace
+*.swp
+*.swo
+
+# Composer
+/vendor/
+/composer.phar
+# Keep composer.lock tracked for reproducible installs
+
+# Environment & secrets
+.env
+.env.*
+/application/config/database.php
+
+# CodeIgniter cache/logs (keep placeholder index.html files)
+application/cache/*
+!application/cache/index.html
+application/cache/sessions/
+application/logs/*
+!application/logs/index.html
+
+# User uploads
+/upload/
+
+# Node/npm (if present)
+node_modules/
+npm-debug.log*
+yarn-error.log*
+pnpm-debug.log*
+
+# Test/coverage/temp
+coverage/
+.phpunit.result.cache
+/tmp/
+*.log
